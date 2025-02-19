@@ -138,8 +138,8 @@ But it is important to use it responsibly and ethically. Here are some guideline
 
 ## Further Information on Files (for Homework)
 
-### 1. Scraping "Most Read" Instead of Main Headline
-The scraper was modified to target the "Most Read" section instead of the main headline. It now finds the most-read article and extracts the headline text. This requires multiple steps, first to find the mostRead section, then to find the mostRead item, and then to extract the title of the mostRead item. 
+### 1. Scraping "News" Section Instead of Main Headline
+The scraper was modified to target the "News" section instead of the main headline. It now finds the first "News" article and extracts the title of the article. This requires multiple steps, first to find the News section, then to find the text of the first News article.
 
 ### 2. Explanation on the Cron Schedule
 The initial cron expression "0 20 * * *" means my job runs at 20:00 UTC every day. The modified cron expression "0 8,20 * * *" means that my job runs twice a day, at 8:00 and 20:00 UTC every day. In general, the five fields indicate: minute, hour, day of the month, month, and day of the week. 
