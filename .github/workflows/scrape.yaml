@@ -47,6 +47,11 @@ jobs:
           touch Pipfile
           pipenv install --deploy --dev
 
+      - name: 🔍 Debug pipenv environment
+        run: |
+          pipenv --version
+          pipenv graph
+
       - name: 🕵️‍♂️ Scrape content and output
         run: |
           pipenv run python ./script.py
