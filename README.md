@@ -135,3 +135,12 @@ But it is important to use it responsibly and ethically. Here are some guideline
 9. Document your scraping process thoroughly for replicability, transparency and accountability.
 
 10. Continuously re-evaluate your scraping program against applicable laws and ethical principles.
+
+## Further Information on Files (for Homework)
+
+### 1. Scraping "Most Read" Instead of Main Headline
+The scraper was modified to target the "Most Read" section instead of the main headline. It now finds the most-read article and extracts the headline text. This requires multiple steps, first to find the mostRead section, then to find the mostRead item, and then to extract the title of the mostRead item. 
+
+### 2. Explanation on the Cron Schedule
+The initial cron expression "0 20 * * *" means my job runs at 20:00 UTC every day. The modified cron expression "0 8,20 * * *" means that my job runs twice a day, at 8:00 and 20:00 UTC every day. In general, the five fields indicate: minute, hour, day of the month, month, and day of the week. 
+
