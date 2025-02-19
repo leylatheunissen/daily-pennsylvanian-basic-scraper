@@ -1,3 +1,5 @@
+name: Scrape Update 🔄
+
 on:
   push:
     branches: [main]
@@ -6,7 +8,6 @@ on:
   schedule:
     - cron: "0 20 * * *"  # 📅 Scrape once a day at 8PM, see crontab.guru for help
 
-name: Scrape Update 🔄
 jobs:
   update-logs:
     name: Scrape Update 🔄
@@ -30,6 +31,7 @@ jobs:
 
       - name: 📦 Install pipenv
         run: |
+          python -m pip install --upgrade pip
           python -m pip install --upgrade pipenv wheel
 
       - name: 🔄 Check pipenv cache before installing dependencies
