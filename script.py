@@ -15,7 +15,7 @@ import loguru
 
 def scrape_data_point():
     """
-    Scrapes the main "Opinion" headline from The Daily Pennsylvanian home page.
+    Scrapes the first Most Read headline from The Daily Pennsylvanian home page.
 
     Returns:
         str: The headline text if found, otherwise an empty string.
@@ -29,20 +29,19 @@ def scrape_data_point():
 
     if req.ok:
         soup = bs4.BeautifulSoup(req.text, "html.parser")
-        opinion_section = soup.find("h3", class_="frontpage-section")
+        news_section = soup.find("div", class_="col-sm-6 section-news")
 
-        if opinion_section and "Opinion" in opinion_section.text:
-            opinion_article = opinion_section.find_next("div", class_="article-summary")
-            if opinion_article:
-                target_element = opinion_article.find("a", class_="frontpage-link medium-link font-regular")
-                if target_element:
-                    headline = target_element.text.strip()
-                    loguru.logger.info(f"Opinion Headline: {headline}")
-                    return headline
+        if news_section:
+            target_element = news_section.find("a", class_="frontpage-link medium-link newstop")
+            if target_element:
+                headline = target_element.text.strip()
+                loguru.logger.info(f"News Headline: {headline}")
+                return headline
                 
-                loguru.logger.info("Could not find the Opinion headline link.")
-                return ""
-        loguru.logger.info("Opinion section not found.")
+            loguru.logger.info("Could not find the News headline link.")
+            return ""
+        
+        loguru.logger.info("News section not found.")
         return ""
     
     loguru.logger.error("Failed to fetch page.")
