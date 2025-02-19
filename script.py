@@ -1,6 +1,6 @@
 """
-Scrapes a headline from The Daily Pennsylvanian website and saves it to a 
-JSON file that tracks headlines over time.
+Scrapes the top "Opinion" peace from The Daily Pennsylvanian website and saves it to a 
+JSON file that tracks the top Opinion headline over time.
 """
 
 import os
@@ -15,7 +15,7 @@ import loguru
 
 def scrape_data_point():
     """
-    Scrapes the main headline from The Daily Pennsylvanian home page.
+    Scrapes the main "Opinion" headline from The Daily Pennsylvanian home page.
 
     Returns:
         str: The headline text if found, otherwise an empty string.
@@ -29,21 +29,24 @@ def scrape_data_point():
 
     if req.ok:
         soup = bs4.BeautifulSoup(req.text, "html.parser")
-        most_read_section = soup.find("span", id="mostRead")
-        if most_read_section:
-            most_read_item = most_read_section.find("div", class_="most-read-item")
-            if most_read_item:
-                target_element = most_read_item.find("a", class_="frontpage-link standard-link")
+        opinion_section = soup.find("h3", class_="frontpage-section")
+
+        if opinion_section and "Opinion" in opinion_section.text:
+            opinion_article = opinion_section.find_next("div", class_="article-summary")
+            if opinion_article:
+                target_element = opinion_article.find("a", class_="frontpage-link medium-link font-regular")
                 if target_element:
-                    data_point = target_element.text.strip()
-                    loguru.logger.info(f"Headline: {data_point}")
-                    return data_point
-        loguru.logger.info("Target element not found")
+                    headline = target_element.text.strip()
+                    loguru.logger.info(f"Opinion Headline: {headline}")
+                    return headline
+                
+                loguru.logger.info("Could not find the Opinion headline link.")
+                return ""
+        loguru.logger.info("Opinion section not found.")
         return ""
-
-
-
-
+    
+    loguru.logger.error("Failed to fetch page.")
+    return ""
 
 if __name__ == "__main__":
 
