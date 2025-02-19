@@ -20,6 +20,8 @@ Based on the contents of the robots.txt file, I am allowed to scrape the Daily P
 website, but I must respect a 10 second delay between requests.
 
 To break it down:
-The user-agent * means the rule applies to all web crawlers and bots. 
-Crawl-delay: 10 means that crawlers must wait 10 seconds between requests. 
-Allow / means that all pages of the sites are accessible. 
+- The user-agent * means the rule applies to all web crawlers and bots.
+
+- Crawl-delay: 10 means that crawlers must wait 10 seconds between requests.
+
+- Allow / means that all pages of the sites are accessible. 
