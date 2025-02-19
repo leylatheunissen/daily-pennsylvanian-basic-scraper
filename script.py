@@ -1,6 +1,6 @@
 """
-Scrapes the top "Opinion" peace from The Daily Pennsylvanian website and saves it to a 
-JSON file that tracks the top Opinion headline over time.
+Scrapes the top "News" piece from The Daily Pennsylvanian website and saves it to a 
+JSON file that tracks the top News headline over time.
 """
 
 import os
@@ -15,7 +15,7 @@ import loguru
 
 def scrape_data_point():
     """
-    Scrapes the first Most Read headline from The Daily Pennsylvanian home page.
+    Scrapes the first News headline from The Daily Pennsylvanian home page.
 
     Returns:
         str: The headline text if found, otherwise an empty string.
@@ -41,10 +41,10 @@ def scrape_data_point():
             loguru.logger.info("Could not find the News headline link.")
             return ""
         
-        loguru.logger.info("News section not found.")
+        loguru.logger.info("Could not find the News section.")
         return ""
     
-    loguru.logger.error("Failed to fetch page.")
+    loguru.logger.error("Could not find the page.")
     return ""
 
 if __name__ == "__main__":
