@@ -19,6 +19,7 @@ jobs:
       deployments: write
       pull-requests: write
       repository-projects: write
+      issues: write
 
     steps:
       - name: 📥 Check out repository code
