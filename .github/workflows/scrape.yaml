@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: "0 1,13 * * *"  # 📅 Scrape twice a day, once at 8AM and once at 8PM EST
+    - cron: "0 1,13 * * *"  # 📅 Scrape twice a day, once at 8AM and once at 8PM EST. Converted from UTC to EST time zone
 
 jobs:
   update-logs:
