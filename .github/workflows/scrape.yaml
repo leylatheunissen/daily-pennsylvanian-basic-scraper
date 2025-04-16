@@ -44,7 +44,7 @@ jobs:
 
       - name: 🛠 Install dependencies
         run: |
-          pipenv install --deploy --dev
+          pipenv install --deploy --dev --python=$(which python3)
 
       - name: 🔍 Debug pipenv environment
         run: |
