@@ -36,21 +36,18 @@ jobs:
           python -m pip install --upgrade pipenv wheel
 
       - name: 🔄 Check pipenv cache before installing dependencies
-39|         id: cache-pipenv
-40|         uses: actions/cache@v4
-41|         with:
-42|           path: ~/.local/share/virtualenvs
-43|           key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-44|           restore-keys: |
-45|             ${{ runner.os }}-pipenv-
+        id: cache-pipenv
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
 
-       - name: 🛠 Install dependencies
-         run: |
-           python -m pip install --upgrade pip
-           python -m pip install pipenv wheel
-           pipenv --clear  # Clear any existing virtual environment
-           pipenv --python 3.9
-           pipenv install --deploy --dev
+      - name: 🛠 Install dependencies
+        if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        run: |
+          touch Pipfile
+          pip install requests beautifulsoup4 loguru
+          pipenv install --deploy --dev
 
       - name: 🔍 Debug pipenv environment
         run: |
