@@ -42,12 +42,12 @@ jobs:
           # path: ~/.local/share/virtualenvs
           # key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
 
-      # - name: 🛠 Install dependencies
-        # if: steps.cache-pipenv.outputs.cache-hit != 'true'
-        # run: |
-          # touch Pipfile
-          # pip install requests beautifulsoup4 loguru
-          # pipenv install --deploy --dev
+      - name: 🛠 Install dependencies
+        if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        run: |
+          touch Pipfile
+          pip install requests beautifulsoup4 loguru
+          pipenv install --deploy --dev
 
       - name: 🔍 Debug pipenv environment
         run: |
